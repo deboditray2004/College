@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Find Largest Number</title>
+</head>
+<body>
+    <h2>Find the Largest Number</h2>
+    <input type="number" id="n1" placeholder="Number 1"><br><br>
+    <input type="number" id="n2" placeholder="Number 2"><br><br>
+    <input type="number" id="n3" placeholder="Number 3"><br><br>
+    
+    <button onclick="findLargest()">Find Largest</button>
+    
+    <h3>Largest Number: <span id="largestRes"></span></h3>
+
+    <script>
+        function findLargest() {
+            var a = Number(document.getElementById("n1").value);
+            var b = Number(document.getElementById("n2").value);
+            var c = Number(document.getElementById("n3").value);
+
+            // Using Math.max for efficiency
+            var maxNum = Math.max(a, b, c);
+
+            document.getElementById("largestRes").innerText = maxNum;
+        }
+    </script>
+</body>
+</html>

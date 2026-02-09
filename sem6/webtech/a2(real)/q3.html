@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Click Counter</title>
+</head>
+<body>
+    <h2>Button Click Counter</h2>
+    <p>Count: <span id="countDisplay" style="font-size: 24px; font-weight: bold;">0</span></p>
+    <button onclick="incrementCount()">Click Me!</button>
+
+    <script>
+        // Initialize counter variable
+        var count = 0;
+
+        function incrementCount() {
+            count++; // Increment count by 1
+            document.getElementById("countDisplay").innerText = count;
+        }
+    </script>
+</body>
+</html>

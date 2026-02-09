@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Toggle Visibility</title>
+</head>
+<body>
+    <h2>Show/Hide Paragraph</h2>
+    
+    <button onclick="toggleText()">Toggle Text</button>
+    
+    <p id="myParagraph" style="display: block; background-color: #f0f0f0; padding: 10px;">
+        This is the secret paragraph. It can appear and disappear based on the button click!
+    </p>
+
+    <script>
+        function toggleText() {
+            var p = document.getElementById("myParagraph");
+            
+            if (p.style.display === "none") {
+                p.style.display = "block";
+            } else {
+                p.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>

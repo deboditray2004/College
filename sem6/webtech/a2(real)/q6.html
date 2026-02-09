@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Marks</title>
+</head>
+<body>
+    <h2>Result Calculator</h2>
+    <p>Subject 1: <input type="number" id="sub1"></p>
+    <p>Subject 2: <input type="number" id="sub2"></p>
+    <p>Subject 3: <input type="number" id="sub3"></p>
+    
+    <button onclick="calculateResult()">Get Result</button>
+    
+    <div style="margin-top: 20px;">
+        <p>Total: <span id="total">0</span></p>
+        <p>Average: <span id="avg">0</span></p>
+        <p>Result: <span id="status">---</span></p>
+    </div>
+
+    <script>
+        function calculateResult() {
+            // Parse inputs as numbers (otherwise they concatenate as strings)
+            var s1 = Number(document.getElementById("sub1").value);
+            var s2 = Number(document.getElementById("sub2").value);
+            var s3 = Number(document.getElementById("sub3").value);
+
+            var total = s1 + s2 + s3;
+            var average = total / 3;
+
+            document.getElementById("total").innerText = total;
+            document.getElementById("avg").innerText = average.toFixed(2); // Round to 2 decimals
+
+            // Pass condition: Average must be 40 or above
+            if(average >= 40) {
+                document.getElementById("status").innerText = "PASS";
+                document.getElementById("status").style.color = "green";
+            } else {
+                document.getElementById("status").innerText = "FAIL";
+                document.getElementById("status").style.color = "red";
+            }
+        }
+    </script>
+</body>
+</html>

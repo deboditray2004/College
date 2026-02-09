@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Square and Cube</title>
+</head>
+<body>
+    <h2>Calculate Square and Cube</h2>
+    <input type="number" id="numberIn" placeholder="Enter Number">
+    <button onclick="calculate()">Calculate</button>
+
+    <div style="margin-top: 15px;">
+        <p>Square: <span id="sqVal">0</span></p>
+        <p>Cube: <span id="cubeVal">0</span></p>
+    </div>
+
+    <script>
+        function calculate() {
+            var n = Number(document.getElementById("numberIn").value);
+            
+            var square = n * n;
+            var cube = n * n * n;
+
+            document.getElementById("sqVal").innerText = square;
+            document.getElementById("cubeVal").innerText = cube;
+        }
+    </script>
+</body>
+</html>

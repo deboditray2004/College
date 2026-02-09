@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Advanced Registration & Validation</title>
+    <style>
+        /* 1. Different Font Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            padding: 40px 0;
+            /* 2. Background Image Control */
+            background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+            background-repeat: repeat; /* Tiled background */
+        }
+
+        .card {
+            background: #ffffff;
+            width: 450px;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            background-image: url('https://via.placeholder.com/80/f8f9fa/adb5bd?text=ID');
+            background-repeat: no-repeat; /* No-repeat for the icon background */
+            background-position: 95% 5%;
+        }
+
+        h2 {
+            font-family: 'Georgia', serif;
+            font-style: italic;
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        .input-group { margin-bottom: 15px; }
+
+        label {
+            display: block;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+
+        .error-text {
+            color: #d63031;
+            font-size: 0.8rem;
+            margin-top: 4px;
+            display: block;
+        }
+
+        /* 3 & 4. Link Styles and Customized Cursors */
+        .policy-link:link { color: #0984e3; text-decoration: none; cursor: help; }
+        .policy-link:visited { color: #6c5ce7; }
+        .policy-link:hover { color: #d63031; text-decoration: underline; cursor: crosshair; }
+        .policy-link:active { color: #00b894; cursor: wait; }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover { background: #2980b9; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Member Registration</h2>
+    <form id="regForm">
+        <div class="input-group">
+            <label>First Name</label>
+            <input type="text" id="firstName" placeholder="Alphabets only, min 6 chars">
+            <span id="nameErr" class="error-text"></span>
+        </div>
+
+        <div class="input-group">
+            <label>Last Name</label>
+            <input type="text" id="lastName" placeholder="Cannot be empty">
+            <span id="lNameErr" class="error-text"></span>
+        </div>
+
+        <div class="input-group">
+            <label>Email ID</label>
+            <input type="text" id="email" placeholder="name@domain.com">
+            <span id="emailErr" class="error-text"></span>
+        </div>
+
+        <div class="input-group">
+            <label>Mobile Number</label>
+            <input type="text" id="mobile" placeholder="10 digits only">
+            <span id="mobileErr" class="error-text"></span>
+        </div>
+
+        <div class="input-group">
+            <label>Password</label>
+            <input type="password" id="password" placeholder="Min 6 characters">
+            <span id="passErr" class="error-text"></span>
+        </div>
+
+        <div class="input-group">
+            <label>Address</label>
+            <textarea id="address" rows="3" placeholder="Cannot be empty"></textarea>
+            <span id="addrErr" class="error-text"></span>
+        </div>
+
+        <button type="submit">Submit Registration</button>
+    </form>
+
+    <p style="font-size: 0.8rem; text-align: center; margin-top: 20px;">
+        By signing up, you agree to our 
+        <a href="#" class="policy-link">Privacy Policy</a>.
+    </p>
+</div>
+
+<script>
+    document.getElementById('regForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Reset Error Messages
+        document.querySelectorAll('.error-text').forEach(el => el.innerText = '');
+
+        // Capture Values
+        const fName = document.getElementById('firstName').value.trim();
+        const lName = document.getElementById('lastName').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const mobile = document.getElementById('mobile').value.trim();
+        const password = document.getElementById('password').value;
+        const address = document.getElementById('address').value.trim();
+
+        let isValid = true;
+
+        // 1. First Name: Alphabets only, Min length 6
+        const nameRegex = /^[A-Za-z]{6,}$/;
+        if (!nameRegex.test(fName)) {
+            document.getElementById('nameErr').innerText = "Must contain only alphabets (min 6).";
+            isValid = false;
+        }
+
+        // 2. Last Name: Not Empty
+        if (lName === "") {
+            document.getElementById('lNameErr').innerText = "Last name is required.";
+            isValid = false;
+        }
+
+        // 3. Email ID: Standard Pattern
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            document.getElementById('emailErr').innerText = "Please enter a valid email address.";
+            isValid = false;
+        }
+
+        // 4. Mobile Number: Exactly 10 digits
+        const mobileRegex = /^[0-9]{10}$/;
+        if (!mobileRegex.test(mobile)) {
+            document.getElementById('mobileErr').innerText = "Must be exactly 10 digits.";
+            isValid = false;
+        }
+
+        // 5. Password: Min length 6
+        if (password.length < 6) {
+            document.getElementById('passErr').innerText = "Password must be at least 6 characters.";
+            isValid = false;
+        }
+
+        // 6. Address: Not Empty
+        if (address === "") {
+            document.getElementById('addrErr').innerText = "Address field cannot be empty.";
+            isValid = false;
+        }
+
+        if (isValid) {
+            alert("Registration validated successfully!");
+        }
+    });
+</script>
+
+</body>
+</html>

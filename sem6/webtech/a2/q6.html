@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Intro Page</title>
+    <style>
+        /* a) Different Font Styles */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        h1 {
+            font-family: "Times New Roman", serif;
+            font-style: italic;
+            font-size: 45px;
+            color: #333;
+        }
+
+        /* b) Control image repetition and visibility */
+        .bg-box {
+            /* Changed height to vh (viewport height) so the box is big enough to see the image */
+            height: 60vh; 
+            width: 90%;
+            margin: 20px auto;
+            border: 2px dashed #bbb;
+
+            /* Image Setup */
+            background-image: url('The_Day_the_Earth_Smiled_-_PIA17172.jpg');
+            background-color: #000; /* Dark background since the image is space-themed */
+            
+            background-repeat: no-repeat; /* Requirement B */
+            background-position: center;
+            
+            /* THIS LINE MAKES THE ENTIRE IMAGE VISIBLE */
+            background-size: contain; 
+        }
+
+        /* c) Define styles for links & d) Customized cursors */
+        
+        /* Unvisited link */
+        a:link {
+            color: #007bff;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: crosshair; /* Custom cursor 1 */
+        }
+
+        /* Visited link */
+        a:visited {
+            color: #6f42c1;
+        }
+
+        /* Mouse over link */
+        a:hover {
+            color: #dc3545;
+            text-decoration: underline;
+            cursor: help; /* Custom cursor 2 */
+        }
+
+        /* Selected link (while clicking) */
+        a:active {
+            color: #28a745;
+            cursor: wait; /* Custom cursor 3 */
+        }
+
+        nav {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Welcome!</h1>
+    
+    <div class="bg-box">
+        </div>
+
+    <p>The image above is set to <b>no-repeat</b> and <b>contain</b> to show the full picture.</p>
+    
+    <nav>
+        <a href="#home">Home</a> | 
+        <a href="#about">About</a> | 
+        <a href="https://google.com" target="_blank">External Link</a>
+    </nav>
+
+</body>
+</html>

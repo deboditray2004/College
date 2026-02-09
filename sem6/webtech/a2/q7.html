@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Club Page</title>
+    <style>
+        /* Basic Body Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        /* 1. HEADER with Gradient Background */
+        header {
+            /* CSS3: Gradient Background */
+            background: linear-gradient(to right, cornflowerblue, purple);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            /* CSS3: Shadow Effect */
+            text-shadow: 2px 2px 4px #000000;
+        }
+
+        /* 2. NAVIGATION MENU */
+        nav {
+            background-color: #333;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 15px 20px;
+            display: inline-block;
+            font-size: 18px;
+            /* CSS3: Transition Effect */
+            transition: background-color 0.5s;
+        }
+
+        nav a:hover {
+            background-color: tomato;
+        }
+
+        /* 3. CONTENT SECTION */
+        .content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .info-box {
+            background-color: white;
+            border: 2px solid #333;
+            width: 30%;
+            display: inline-block;
+            margin: 10px;
+            padding: 20px;
+            
+            /* CSS3: Rounded Corners */
+            border-radius: 20px;
+            
+            /* CSS3: Shadow Effects */
+            box-shadow: 5px 5px 10px gray;
+            
+            /* CSS3: Transition for the transform */
+            transition: transform 0.5s;
+        }
+
+        /* CSS3: Transform Effect (Rotate and Scale) */
+        .info-box:hover {
+            transform: scale(1.1);
+            background-color: lightyellow;
+        }
+
+        /* 4. FOOTER */
+        footer {
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Responsive: Stack boxes on small screens */
+        @media (max-width: 600px) {
+            .info-box {
+                width: 80%;
+                display: block;
+                margin: 10px auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>The Robotics Club</h1>
+        <p>Join us to build the future!</p>
+    </header>
+
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Events</a>
+        <a href="#">Gallery</a>
+        <a href="#">Contact</a>
+    </nav>
+
+    <div class="content">
+        <h2>Why Join Us?</h2>
+        
+        <div class="info-box">
+            <h3>Workshops</h3>
+            <p>We hold weekly workshops on Arduino and Python programming.</p>
+        </div>
+
+        <div class="info-box">
+            <h3>Competitions</h3>
+            <p>Participate in Robo-Wars and national level tech fests.</p>
+        </div>
+
+        <div class="info-box">
+            <h3>Community</h3>
+            <p>Make new friends who love technology and innovation.</p>
+        </div>
+        
+        <br><br><br> </div>
+
+    <footer>
+        <p>Copyright © 2024 College Robotics Club</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+<form id="regForm" onsubmit="validateForm(event)">
+  <div>
+    <input type="text" id="name" placeholder="Full Name">
+    <p id="errName" style="color:red; font-size:12px; margin:0;"></p>
+  </div>
+  <div>
+    <input type="text" id="email" placeholder="Email">
+    <p id="errEmail" style="color:red; font-size:12px; margin:0;"></p>
+  </div>
+  <div>
+    <input type="password" id="pass" placeholder="Password">
+    <p id="errPass" style="color:red; font-size:12px; margin:0;"></p>
+  </div>
+  <div>
+    <input type="password" id="confirmPass" placeholder="Confirm Password">
+    <p id="errConfirm" style="color:red; font-size:12px; margin:0;"></p>
+  </div>
+  <button type="submit">Register</button>
+</form>
+
+<script>
+  function validateForm(e) {
+    e.preventDefault();
+    let isValid = true;
+
+    // Reset errors
+    document.querySelectorAll("p[id^='err']").forEach(el => el.textContent = "");
+
+    const name = document.getElementById('name').value;
+    if (!name.trim()) {
+      document.getElementById('errName').textContent = "Name cannot be empty";
+      isValid = false;
+    }
+
+    const email = document.getElementById('email').value;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      document.getElementById('errEmail').textContent = "Invalid email format";
+      isValid = false;
+    }
+
+    const pass = document.getElementById('pass').value;
+    const passRegex = /^(?=.*[A-Z])(?=.*\d).+$/; // Uppercase + number
+    if (!passRegex.test(pass)) {
+      document.getElementById('errPass').textContent = "Must contain 1 uppercase and 1 number";
+      isValid = false;
+    }
+
+    const confirmPass = document.getElementById('confirmPass').value;
+    if (pass !== confirmPass || confirmPass === "") {
+      document.getElementById('errConfirm').textContent = "Passwords do not match";
+      isValid = false;
+    }
+
+    if (isValid) alert("Registration Successful!");
+  }
+</script>

@@ -1,0 +1,19 @@
+<textarea id="myTextarea" maxlength="200" rows="5" cols="40" placeholder="Type here..."></textarea>
+<p><span id="charCount">200</span> characters remaining</p>
+
+<script>
+  const textarea = document.getElementById('myTextarea');
+  const counter = document.getElementById('charCount');
+
+  textarea.addEventListener('input', function() {
+    const remaining = 200 - this.value.length;
+    counter.textContent = remaining;
+    
+    // Optional: Change color when getting close to the limit
+    if (remaining <= 20) {
+      counter.style.color = "red";
+    } else {
+      counter.style.color = "black";
+    }
+  });
+</script>

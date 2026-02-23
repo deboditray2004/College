@@ -1,0 +1,67 @@
+<input type="text" id="searchInput" placeholder="Search Pokémon by name..." onkeyup="filterTable()" style="padding: 5px; width: 250px;">
+<table border="1" style="margin-top: 15px; width: 100%; text-align: left; border-collapse: collapse;">
+  <thead style="background-color: #f4f4f4;">
+    <tr>
+      <th style="padding: 8px;">Pokémon Name</th>
+      <th style="padding: 8px;">API Details Link</th>
+    </tr>
+  </thead>
+  <tbody id="pokemonTableBody">
+    <tr><td colspan="2" style="padding: 8px;">Loading Pokémon...</td></tr>
+  </tbody>
+</table>
+
+<script>
+  let pokemonList = [];
+
+  // Fetch data from PokeAPI
+  fetch('https://pokeapi.co/api/v2/pokemon/?limit=100')
+    .then(response => {
+      // response.json() automatically handles the JSON.parse() step behind the scenes
+      return response.json(); 
+    })
+    .then(data => {
+      pokemonList = data.results; // PokeAPI wraps the array inside a 'results' property
+      renderTable(pokemonList);
+    })
+    .catch(error => {
+      console.error("Error fetching data:", error);
+      const tbody = document.getElementById('pokemonTableBody');
+      tbody.innerHTML = "<tr><td colspan='2' style='color:red;'>Failed to load data.</td></tr>";
+    });
+
+  // Function to build the DOM table
+  function renderTable(data) {
+    const tbody = document.getElementById('pokemonTableBody');
+    tbody.innerHTML = ""; // Clear out the "Loading..." text
+
+    if (data.length === 0) {
+      tbody.innerHTML = "<tr><td colspan='2' style='padding: 8px;'>No Pokémon match your search.</td></tr>";
+      return;
+    }
+
+    data.forEach(pokemon => {
+      const tr = document.createElement('tr');
+      
+      // Optional: Capitalize the first letter for a cleaner look
+      const capitalizedName = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
+      
+      tr.innerHTML = `
+        <td style="padding: 8px;">${capitalizedName}</td>
+        <td style="padding: 8px;"><a href="${pokemon.url}" target="_blank">View Raw Data</a></td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  // Function to handle live search filtering
+  function filterTable() {
+    const query = document.getElementById('searchInput').value.toLowerCase();
+    
+    const filteredData = pokemonList.filter(pokemon => 
+      pokemon.name.toLowerCase().includes(query)
+    );
+    
+    renderTable(filteredData);
+  }
+</script>

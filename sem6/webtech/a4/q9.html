@@ -1,0 +1,102 @@
+<div id="quizContainer">
+  <h3 id="questionText"></h3>
+  <div id="optionsContainer"></div>
+  <button id="nextBtn" onclick="nextQuestion()" style="display:none; margin-top:10px;">Next</button>
+</div>
+<h2 id="scoreDisplay" style="display:none;"></h2>
+
+<script>
+  const quizData = [
+    { 
+      q: "What is 2 + 2?", 
+      options: ["3", "4", "5"], 
+      answer: "4" 
+    },
+    { 
+      q: "What is the capital of France?", 
+      options: ["Berlin", "London", "Paris", "Madrid"], 
+      answer: "Paris" 
+    },
+    { 
+      q: "Which planet is known as the Red Planet?", 
+      options: ["Earth", "Mars", "Jupiter", "Venus"], 
+      answer: "Mars" 
+    },
+    { 
+      q: "What does HTML stand for?", 
+      options: ["Hyper Text Markup Language", "High Tech Modern Language", "Hyperlink Text Markup Language"], 
+      answer: "Hyper Text Markup Language" 
+    },
+    { 
+      q: "What is the largest ocean on Earth?", 
+      options: ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"], 
+      answer: "Pacific Ocean" 
+    },
+    { 
+      q: "Which of these is a popular JavaScript library?", 
+      options: ["React", "Laravel", "Django"], 
+      answer: "React" 
+    },
+    { 
+      q: "How many continents are there on Earth?", 
+      options: ["5", "6", "7", "8"], 
+      answer: "7" 
+    }
+  ];
+  
+  let currentQ = 0;
+  let score = 0;
+
+  function loadQuestion() {
+    if (currentQ >= quizData.length) {
+      document.getElementById('quizContainer').style.display = "none";
+      const scoreEl = document.getElementById('scoreDisplay');
+      scoreEl.textContent = `Quiz Over! Score: ${score} out of ${quizData.length}`;
+      scoreEl.style.display = "block";
+      return;
+    }
+
+    const qObj = quizData[currentQ];
+    document.getElementById('questionText').textContent = qObj.q;
+    const optsDiv = document.getElementById('optionsContainer');
+    optsDiv.innerHTML = "";
+    document.getElementById('nextBtn').style.display = "none";
+
+    qObj.options.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.textContent = opt;
+      btn.style.marginRight = "5px";
+      btn.onclick = () => selectAnswer(opt, qObj.answer, btn);
+      optsDiv.appendChild(btn);
+    });
+  }
+
+  function selectAnswer(selected, correct, btnNode) {
+    const allButtons = Array.from(document.getElementById('optionsContainer').children);
+
+    // Check if the selected answer is right or wrong
+    if (selected === correct) {
+      score++;
+      btnNode.style.backgroundColor = "lightgreen";
+    } else {
+      btnNode.style.backgroundColor = "lightcoral";
+    }
+    
+    // Disable all buttons and reveal the correct answer
+    allButtons.forEach(b => {
+      b.disabled = true;
+      if (b.textContent === correct) {
+        b.style.backgroundColor = "lightgreen";
+      }
+    });
+    
+    document.getElementById('nextBtn').style.display = "block";
+  }
+
+  function nextQuestion() {
+    currentQ++;
+    loadQuestion();
+  }
+
+  loadQuestion(); // Init
+</script>

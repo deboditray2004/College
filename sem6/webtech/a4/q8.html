@@ -1,0 +1,41 @@
+<img id="sliderImg" src="" alt="Slider Image" width="300" height="200" style="background:#ccc; display:block; margin-bottom:10px;">
+<button onclick="changeSlide(-1)">Previous</button>
+<button onclick="changeSlide(1)">Next</button>
+
+<script>
+  const images = [
+    "https://cdn.esahubble.org/archives/images/screen/heic2017a.jpg",
+    "https://cdn.esahubble.org/archives/images/screen/heic1501a.jpg",
+    "https://cdn.esahubble.org/archives/images/screen/heic2018b.jpg",
+    "https://cdn.esahubble.org/archives/images/screen/opo0328a.jpg",
+    "https://cdn.esahubble.org/archives/images/screen/heic1917a.jpg",
+    "https://cdn.esahubble.org/archives/images/screen/heic0910h.jpg",
+    "https://cdn.esahubble.org/archives/images/screen/heic0514a.jpg",
+    "https://cdn.esahubble.org/archives/images/screen/heic0506a.jpg",
+    "https://cdn.esahubble.org/archives/images/screen/opo0501a.jpg",
+    "https://cdn.esahubble.org/archives/images/screen/heic0910i.jpg"
+  ];
+  let currentIdx = 0;
+  let slideInterval;
+
+  function updateImage() {
+    document.getElementById('sliderImg').src = images[currentIdx];
+  }
+
+  function changeSlide(step) {
+    currentIdx += step;
+    if (currentIdx >= images.length) currentIdx = 0;
+    if (currentIdx < 0) currentIdx = images.length - 1;
+    updateImage();
+    resetInterval(); // Reset timer when manually clicked
+  }
+
+  function resetInterval() {
+    clearInterval(slideInterval);
+    slideInterval = setInterval(() => changeSlide(1), 3000);
+  }
+
+  // Init
+  updateImage();
+  resetInterval();
+</script>

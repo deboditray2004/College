@@ -1,0 +1,20 @@
+<input type="text" id="searchInput" placeholder="Search items..." onkeyup="filterItems()">
+<ul id="itemList">
+  <li>Apple</li><li>Banana</li><li>Cherry</li><li>Date</li><li>Elderberry</li>
+  <li>Fig</li><li>Grape</li><li>Honeydew</li><li>Kiwi</li><li>Lemon</li>
+</ul>
+
+<script>
+  function filterItems() {
+    const query = document.getElementById('searchInput').value.toLowerCase();
+    const items = Array.from(document.getElementById('itemList').getElementsByTagName('li'));
+
+    items.forEach(item => {
+      if (item.textContent.toLowerCase().includes(query)) {
+        item.style.display = "list-item";
+      } else {
+        item.style.display = "none";
+      }
+    });
+  }
+</script>

@@ -1,0 +1,31 @@
+<button onclick="generateOTP()">Generate OTP</button>
+<p>Your OTP: <span id="displayOTP">---</span></p>
+
+<input type="text" id="userInput" placeholder="Enter 6-digit OTP">
+<button onclick="verifyOTP()">Verify</button>
+<p id="otpMessage"></p>
+
+<script>
+  let currentOTP = null;
+
+  function generateOTP() {
+    currentOTP = Math.floor(100000 + Math.random() * 900000).toString();
+    document.getElementById('displayOTP').textContent = currentOTP;
+    document.getElementById('otpMessage').textContent = "";
+  }
+
+  function verifyOTP() {
+    const userInput = document.getElementById('userInput').value;
+    const msg = document.getElementById('otpMessage');
+    
+    if (!currentOTP) {
+      msg.textContent = "Please generate an OTP first.";
+    } else if (userInput === currentOTP) {
+      msg.textContent = "Valid OTP";
+      msg.style.color = "green";
+    } else {
+      msg.textContent = "Invalid OTP";
+      msg.style.color = "red";
+    }
+  }
+</script>

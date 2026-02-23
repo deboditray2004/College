@@ -1,0 +1,44 @@
+<input type="number" id="num1" placeholder="Num 1">
+<input type="number" id="num2" placeholder="Num 2">
+<button onclick="calculate('+')">+</button>
+<button onclick="calculate('-')">-</button>
+<button onclick="calculate('*')">×</button>
+<button onclick="calculate('/')">÷</button>
+<p>Result: <span id="calcResult">0</span></p>
+<h3>History (Last 5)</h3>
+<ul id="calcHistory"></ul>
+
+<script>
+  let historyArr = [];
+
+  function calculate(operator) {
+    const n1 = parseFloat(document.getElementById('num1').value);
+    const n2 = parseFloat(document.getElementById('num2').value);
+    if (isNaN(n1) || isNaN(n2)) return;
+
+    let result = 0;
+    if (operator === '+') result = n1 + n2;
+    if (operator === '-') result = n1 - n2;
+    if (operator === '*') result = n1 * n2;
+    if (operator === '/') result = n1 / n2;
+
+    document.getElementById('calcResult').textContent = result;
+    
+    const equation = `${n1} ${operator} ${n2} = ${result}`;
+    historyArr.push(equation);
+    
+    if (historyArr.length > 5) historyArr.shift(); // Keep only last 5
+    
+    updateHistoryDOM();
+  }
+
+  function updateHistoryDOM() {
+    const list = document.getElementById('calcHistory');
+    list.innerHTML = "";
+    historyArr.forEach(item => {
+      const li = document.createElement('li');
+      li.textContent = item;
+      list.appendChild(li);
+    });
+  }
+</script>

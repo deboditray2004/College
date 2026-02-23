@@ -1,0 +1,38 @@
+<div id="loginSection">
+  <input type="text" id="username" placeholder="Enter Username">
+  <button onclick="login()">Login</button>
+</div>
+
+<div id="welcomeSection" style="display:none;">
+  <h3 id="greeting"></h3>
+  <button onclick="logout()">Logout</button>
+</div>
+
+<script>
+  // Check on load
+  window.onload = function() {
+    const savedUser = localStorage.getItem('username');
+    if (savedUser) showWelcome(savedUser);
+  };
+
+  function login() {
+    const user = document.getElementById('username').value.trim();
+    if (user) {
+      localStorage.setItem('username', user);
+      showWelcome(user);
+    }
+  }
+
+  function logout() {
+    localStorage.removeItem('username');
+    document.getElementById('loginSection').style.display = 'block';
+    document.getElementById('welcomeSection').style.display = 'none';
+    document.getElementById('username').value = "";
+  }
+
+  function showWelcome(user) {
+    document.getElementById('loginSection').style.display = 'none';
+    document.getElementById('welcomeSection').style.display = 'block';
+    document.getElementById('greeting').textContent = "Welcome back, " + user + "!";
+  }
+</script>
